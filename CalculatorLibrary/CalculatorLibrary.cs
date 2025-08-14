@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace CalculatorLibrary;
 
@@ -67,5 +66,10 @@ public class Calculator
         writer.WriteEndArray();
         writer.WriteEndObject();
         writer.Close();
+    }
+
+    public int CalculatorUsed(int timesCalculatorIsUsed)
+    {
+        return timesCalculatorIsUsed++;
     }
 }

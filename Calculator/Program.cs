@@ -8,6 +8,7 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
+        int timesCalculatorIsUsed = 0;
         // Display title as the C# console calculator app.
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
@@ -21,6 +22,10 @@ class Program
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
+
+            timesCalculatorIsUsed = calculator.CalculatorUsed(timesCalculatorIsUsed);
+
+            Console.WriteLine($"Times calculator has been used: {timesCalculatorIsUsed}\n");
 
             // Ask the user to type the first number.
             Console.Write("Type a number, and then press Enter: ");
@@ -82,10 +87,10 @@ class Program
             if (Console.ReadLine() == "n") endApp = true;
 
             Console.WriteLine("\n"); // Friendly linespacing.
+
         }
 
         calculator.Finish();
-        return;
 
         return;
     }
