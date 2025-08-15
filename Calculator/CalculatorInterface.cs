@@ -3,14 +3,17 @@ using static CalculatorProgram.Enums;
 
 namespace CalculatorProgram;
 
-internal class CalculatorInterface
+internal static class CalculatorInterface
 {
     internal static void CalculatorMenu()
     {
         CalculatorOption? calculatorOption;
+        bool exitProgram = false;
 
         do
         {
+            CalculatorFunctionality calculatorFunctionality = new();
+
             Console.Clear();
 
             calculatorOption = AnsiConsole.Prompt(
@@ -19,7 +22,14 @@ internal class CalculatorInterface
             .AddChoices(Enum.GetValues<CalculatorOption>())
             );
 
+            if (calculatorOption == CalculatorOption.Exit)
+            {
+                exitProgram = true;
+                continue;
+            }
 
-        } while (calculatorOption != CalculatorOption.Exit);
+            calculatorFunctionality.CalculatorLogic();
+
+        } while (exitProgram == false);
     }
 }
