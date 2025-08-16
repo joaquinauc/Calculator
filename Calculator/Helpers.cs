@@ -6,6 +6,8 @@ internal class Helpers
 
     internal static void AddToHistory((string, double) calculation)
     {
+        if (LatestHistory.Count >= 5) LatestHistory.RemoveAt(0);
+
         LatestHistory.Add(calculation);
     }
 }

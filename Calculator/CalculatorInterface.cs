@@ -34,6 +34,7 @@ internal static class CalculatorInterface
             }
 
         } while (exitProgram == false);
+
     }
 
     internal static int LatestHistoryMenu()
@@ -59,5 +60,6 @@ internal static class CalculatorInterface
         }
 
         return Helpers.LatestHistory.IndexOf(calculationOption);
-        }
+
+    }
 }
