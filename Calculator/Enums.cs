@@ -8,5 +8,11 @@ internal class Enums
         LatestCalculations,
         Exit
     }
+
+    internal enum DeleteOrUseResult
+    {
+        UseResult,
+        Delete
+    }
 }
 

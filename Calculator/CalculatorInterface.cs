@@ -15,9 +15,9 @@ internal static class CalculatorInterface
             Console.Clear();
 
             calculatorOption = AnsiConsole.Prompt(
-            new SelectionPrompt<CalculatorOption>()
-            .Title("Select which action you wish to do: ")
-            .AddChoices(Enum.GetValues<CalculatorOption>())
+                new SelectionPrompt<CalculatorOption>()
+                .Title("Select which action you wish to do: ")
+                .AddChoices(Enum.GetValues<CalculatorOption>())
             );
 
             if (calculatorOption == CalculatorOption.Exit)
@@ -46,9 +46,9 @@ internal static class CalculatorInterface
         try 
         {
             calculationOption = AnsiConsole.Prompt(
-            new SelectionPrompt<(string, double)>()
-            .Title("Select a calculation which you want to use the result for another calculation, or delete it: ")
-            .AddChoices(Helpers.LatestHistory)
+                new SelectionPrompt<(string, double)>()
+                .Title("Select a calculation which you want to use the result for another calculation, or delete it: ")
+                .AddChoices(Helpers.LatestHistory)
             );
         }
         catch (InvalidOperationException)
@@ -60,6 +60,26 @@ internal static class CalculatorInterface
         }
 
         return Helpers.LatestHistory.IndexOf(calculationOption);
+    }
 
+    internal static void UseOrDelete(int indexOfCalculation)
+    {
+        Console.Clear();
+
+        var useOrDeleteOption = AnsiConsole.Prompt(
+            new SelectionPrompt<DeleteOrUseResult>()
+            .Title("Select an option: ")
+            .AddChoices(Enum.GetValues<DeleteOrUseResult>())
+        );
+
+        if (useOrDeleteOption == DeleteOrUseResult.UseResult)
+        {
+            string resultOfCalculation = String.Format("{0}", Helpers.LatestHistory[indexOfCalculation].Item2);
+            CalculatorFunctionality.CalculatorLogic(resultOfCalculation);
+        }
+        else
+        {
+            Helpers.DeleteOfHistory(indexOfCalculation);
+        }
     }
 }

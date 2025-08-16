@@ -5,7 +5,7 @@ namespace CalculatorProgram;
 
 internal static class CalculatorFunctionality
 {
-    internal static void CalculatorLogic()
+    internal static void CalculatorLogic(string? numInput1 = "")
     {
         bool endApp = false;
         int timesCalculatorIsUsed = 0;
@@ -17,8 +17,6 @@ internal static class CalculatorFunctionality
 
         while (!endApp)
         {
-            string? numInput1 = "";
-            string? numInput2 = "";
             double result = 0;
             string operationSymbol = "";
 
@@ -26,20 +24,25 @@ internal static class CalculatorFunctionality
 
             Console.WriteLine($"Times calculator has been used: {timesCalculatorIsUsed}\n");
 
-            Console.Write("Type a number, and then press Enter: ");
-            numInput1 = Console.ReadLine();
+            if (numInput1 == "")
+            {
+                Console.Write("Type a number, and then press Enter: ");
+                numInput1 = Console.ReadLine();
+            }
 
-            double cleanNum1 = 0;
+            double cleanNum1;
             while (!double.TryParse(numInput1, out cleanNum1))
             {
                 Console.Write("This is not valid input. Please enter a numeric value: ");
                 numInput1 = Console.ReadLine();
             }
+            
 
             Console.Write("Type another number, and then press Enter: ");
-            numInput2 = Console.ReadLine();
 
-            double cleanNum2 = 0;
+            string? numInput2 = Console.ReadLine();
+
+            double cleanNum2;
             while (!double.TryParse(numInput2, out cleanNum2))
             {
                 Console.Write("This is not valid input. Please enter a numeric value: ");
@@ -103,9 +106,8 @@ internal static class CalculatorFunctionality
 
     internal static void ShowLatestHistory()
     {
-        int result = CalculatorInterface.LatestHistoryMenu();
+        int indexOfCalculation = CalculatorInterface.LatestHistoryMenu();
 
-        Console.WriteLine(result);
-        Console.ReadLine();
+        CalculatorInterface.UseOrDelete(indexOfCalculation);
     }
 }

@@ -1,14 +1,3 @@
-﻿using System.Text.RegularExpressions;
-using CalculatorLibrary;
+﻿using CalculatorProgram;
 
-namespace CalculatorProgram;
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        CalculatorInterface.CalculatorMenu();
-
-        return;
-    }
-}
+CalculatorInterface.CalculatorMenu();

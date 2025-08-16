@@ -10,4 +10,9 @@ internal class Helpers
 
         LatestHistory.Add(calculation);
     }
+
+    internal static void DeleteOfHistory(int index)
+    {
+        LatestHistory.RemoveAt(index);
+    }
 }
