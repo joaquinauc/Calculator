@@ -20,6 +20,7 @@ internal class CalculatorFunctionality
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
+            string operationSymbol = "";
 
             timesCalculatorIsUsed = calculator.CalculatorUsed(timesCalculatorIsUsed);
 
@@ -62,18 +63,32 @@ internal class CalculatorFunctionality
             {
                 try
                 {
-                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
+                    operationSymbol = op switch
+                    {
+                        "a" => "+",
+                        "s" => "-",
+                        "m" => "*",
+                        "d" => "/",
+                        _ => throw new NotImplementedException()
+                    };
+
+                    result = Math.Round(calculator.DoOperation(cleanNum1, cleanNum2, op), 2);
                     if (double.IsNaN(result))
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
                     }
-                    else Console.WriteLine("Your result: {0:0.##}\n", result);
+                    else Console.WriteLine($"Your result: {result}");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                 }
             }
+
+            string fullOperationFormat = $"{numInput1} {operationSymbol} {numInput2} = {result}";
+
+            Helpers.AddToHistory((fullOperationFormat, result));
+
             Console.WriteLine("------------------------\n");
 
             Console.Write("Press 'n' and Enter to return to the calculator menu, or press any other key and Enter to continue: ");
@@ -84,5 +99,13 @@ internal class CalculatorFunctionality
         }
 
         calculator.Finish();
+    }
+
+    internal void ShowLatestHistory()
+    {
+        int result = CalculatorInterface.LatestHistoryMenu();
+
+        Console.WriteLine(result);
+        Console.ReadLine();
     }
 }

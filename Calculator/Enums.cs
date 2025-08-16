@@ -1,12 +1,12 @@
-﻿namespace CalculatorProgram
+﻿namespace CalculatorProgram;
+
+internal class Enums
 {
-    internal class Enums
+    internal enum CalculatorOption
     {
-        internal enum CalculatorOption
-        {
-            Calculator,
-            LatestCalculations,
-            Exit
-        }
+        Calculator,
+        LatestCalculations,
+        Exit
     }
 }
+
