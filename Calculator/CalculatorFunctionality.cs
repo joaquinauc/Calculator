@@ -29,8 +29,13 @@ internal static class CalculatorFunctionality
                 Console.Write("Type a number, and then press Enter: ");
                 numInput1 = Console.ReadLine();
             }
+            else
+            {
+                Console.WriteLine($"Your first number is: {numInput1}");
+                endApp = true;
+            }
 
-            double cleanNum1;
+                double cleanNum1;
             while (!double.TryParse(numInput1, out cleanNum1))
             {
                 Console.Write("This is not valid input. Please enter a numeric value: ");
@@ -99,6 +104,7 @@ internal static class CalculatorFunctionality
 
             Console.WriteLine("\n");
 
+            numInput1 = "";
         }
 
         calculator.Finish();
