@@ -12,8 +12,6 @@ internal static class CalculatorInterface
 
         do
         {
-            CalculatorFunctionality calculatorFunctionality = new();
-
             Console.Clear();
 
             calculatorOption = AnsiConsole.Prompt(
@@ -28,11 +26,11 @@ internal static class CalculatorInterface
             }
             else if (calculatorOption == CalculatorOption.LatestCalculations)
             {
-                calculatorFunctionality.ShowLatestHistory();
+                CalculatorFunctionality.ShowLatestHistory();
             }
             else
             {
-                calculatorFunctionality.CalculatorLogic();
+                CalculatorFunctionality.CalculatorLogic();
             }
 
         } while (exitProgram == false);

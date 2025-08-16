@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace CalculatorProgram;
 
-internal class CalculatorFunctionality
+internal static class CalculatorFunctionality
 {
-    internal void CalculatorLogic()
+    internal static void CalculatorLogic()
     {
         bool endApp = false;
         int timesCalculatorIsUsed = 0;
@@ -101,7 +101,7 @@ internal class CalculatorFunctionality
         calculator.Finish();
     }
 
-    internal void ShowLatestHistory()
+    internal static void ShowLatestHistory()
     {
         int result = CalculatorInterface.LatestHistoryMenu();
 
