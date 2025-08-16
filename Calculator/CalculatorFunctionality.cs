@@ -97,10 +97,17 @@ internal static class CalculatorFunctionality
 
             Helpers.AddToHistory((fullOperationFormat, result));
 
-            Console.WriteLine("------------------------\n");
-            Console.Write("Press 'n' and Enter to return to the calculator menu, or press any other key and Enter to continue: ");
+            if (endApp == false)
+            {
+                Console.WriteLine("------------------------\n");
+                Console.Write("Press 'n' and Enter to return to the calculator menu, or press any other key or Enter to continue: ");
 
-            if (Console.ReadLine() == "n") endApp = true;
+                if (Console.ReadLine() == "n") endApp = true;
+            }
+            else
+            {
+                Console.WriteLine("Press Enter to exit to the main menu...");
+            }
 
             Console.WriteLine("\n");
 
