@@ -29,19 +29,19 @@ public class Calculator
 
         switch (op)
         {
-            case "a":
+            case "+":
                 result = num1 + num2;
                 writer.WriteValue("Add");
                 break;
-            case "s":
+            case "-":
                 result = num1 - num2;
                 writer.WriteValue("Subtract");
                 break;
-            case "m":
+            case "*":
                 result = num1 * num2;
                 writer.WriteValue("Multiply");
                 break;
-            case "d":
+            case "/":
                 if (num2 != 0)
                 {
                     result = num1 / num2;

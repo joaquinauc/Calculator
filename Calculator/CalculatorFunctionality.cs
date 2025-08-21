@@ -1,5 +1,5 @@
 ﻿using CalculatorLibrary;
-using System.Text.RegularExpressions;
+using System.Runtime.Serialization;
 
 namespace CalculatorProgram;
 
@@ -35,13 +35,13 @@ internal static class CalculatorFunctionality
                 endApp = true;
             }
 
-                double cleanNum1;
+            double cleanNum1;
             while (!double.TryParse(numInput1, out cleanNum1))
             {
                 Console.Write("This is not valid input. Please enter a numeric value: ");
                 numInput1 = Console.ReadLine();
             }
-            
+
 
             Console.Write("Type another number, and then press Enter: ");
 
@@ -54,44 +54,24 @@ internal static class CalculatorFunctionality
                 numInput2 = Console.ReadLine();
             }
 
-            Console.WriteLine("Choose an operator from the following list:");
-            Console.WriteLine("\ta - Add");
-            Console.WriteLine("\ts - Subtract");
-            Console.WriteLine("\tm - Multiply");
-            Console.WriteLine("\td - Divide");
-            Console.Write("Your option? ");
+            // T0D0: Move the calling of the MathOperationsMenu method to the start of the loop to make it easier to implement the other operations.
 
-            string? op = Console.ReadLine();
-
-            if (op == null || !Regex.IsMatch(op, "[a|s|m|d]"))
+            Enums.MathOperation mathOperation = CalculatorInterface.MathOperationsMenu();
+            operationSymbol = mathOperation switch
             {
-                Console.WriteLine("Error: Unrecognized input.");
-            }
-            else
-            {
-                try
-                {
-                    operationSymbol = op switch
-                    {
-                        "a" => "+",
-                        "s" => "-",
-                        "m" => "*",
-                        "d" => "/",
-                        _ => throw new NotImplementedException()
-                    };
+                Enums.MathOperation.Add => "+",
+                Enums.MathOperation.Subtract => "-",
+                Enums.MathOperation.Multiply => "*",
+                Enums.MathOperation.Divide => "/",
+                _ => throw new NotImplementedException()
+            };
 
-                    result = Math.Round(calculator.DoOperation(cleanNum1, cleanNum2, op), 2);
-                    if (double.IsNaN(result))
-                    {
-                        Console.WriteLine("This operation will result in a mathematical error.\n");
-                    }
-                    else Console.WriteLine($"Your result: {result}");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
-                }
+            result = Math.Round(calculator.DoOperation(cleanNum1, cleanNum2, operationSymbol), 2);
+            if (double.IsNaN(result))
+            {
+                Console.WriteLine("This operation will result in a mathematical error.\n");
             }
+            else Console.WriteLine($"Your result: {result}");
 
             string fullOperationFormat = $"{numInput1} {operationSymbol} {numInput2} = {result}";
 
@@ -106,16 +86,17 @@ internal static class CalculatorFunctionality
             }
             else
             {
-                Console.WriteLine("Press Enter to exit to the main menu...");
+                Console.WriteLine("\nPress Enter to exit to the main menu...");
+                Console.ReadLine();
             }
 
             Console.WriteLine("\n");
 
             numInput1 = "";
         }
-
         calculator.Finish();
     }
+            
 
     internal static void ShowLatestHistory()
     {

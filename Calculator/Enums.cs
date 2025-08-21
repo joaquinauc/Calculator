@@ -14,5 +14,21 @@ internal class Enums
         UseResult,
         Delete
     }
+
+    internal enum MathOperation
+    {
+        Add,
+        Subtract,
+        Multiply,
+        Divide,
+        /*
+        SquareRoot,
+        TakingThePower,
+        TenElevatedToX,
+        Sin,
+        Cos,
+        Tan
+        */
+    }
 }
 
