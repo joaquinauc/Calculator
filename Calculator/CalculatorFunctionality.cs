@@ -1,6 +1,4 @@
 ﻿using CalculatorLibrary;
-using System.Runtime.Serialization;
-
 namespace CalculatorProgram;
 
 internal static class CalculatorFunctionality
@@ -14,15 +12,32 @@ internal static class CalculatorFunctionality
         Console.WriteLine("------------------------\n");
 
         Calculator calculator = new();
+        Helpers helpers = new();
 
         while (!endApp)
         {
-            double result = 0;
-            string operationSymbol = "";
+            string fullOperationFormat;
+            double result;
 
-            timesCalculatorIsUsed = calculator.CalculatorUsed(timesCalculatorIsUsed);
+            Enums.MathOperation mathOperation = CalculatorInterface.MathOperationsMenu();
+
+            string operationSymbol = mathOperation switch
+            {
+                Enums.MathOperation.Add => "+",
+                Enums.MathOperation.Subtract => "-",
+                Enums.MathOperation.Multiply => "*",
+                Enums.MathOperation.Divide => "/",
+                Enums.MathOperation.SquareRoot => "√",
+                Enums.MathOperation.TakingThePower => "^",
+                Enums.MathOperation.TenElevatedToX => "10x",
+                Enums.MathOperation.Sin => "Sin",
+                Enums.MathOperation.Cos => "Cos",
+                Enums.MathOperation.Tan => "Tan",
+                _ => throw new NotImplementedException()
+            };
 
             Console.WriteLine($"Times calculator has been used: {timesCalculatorIsUsed}\n");
+            timesCalculatorIsUsed++;
 
             if (numInput1 == "")
             {
@@ -42,38 +57,28 @@ internal static class CalculatorFunctionality
                 numInput1 = Console.ReadLine();
             }
 
-
-            Console.Write("Type another number, and then press Enter: ");
-
-            string? numInput2 = Console.ReadLine();
-
-            double cleanNum2;
-            while (!double.TryParse(numInput2, out cleanNum2))
+            if ("+ - * / ^".Contains(operationSymbol))
             {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput2 = Console.ReadLine();
+                Console.Write("Type another number, and then press Enter: ");
+                string? numInput2 = Console.ReadLine();
+
+                double cleanNum2;
+                while (!double.TryParse(numInput2, out cleanNum2))
+                {
+                    Console.Write("This is not valid input. Please enter a numeric value: ");
+                    numInput2 = Console.ReadLine();
+                }
+
+                result = helpers.GetResult(calculator, operationSymbol, cleanNum1, cleanNum2);
+
+                fullOperationFormat = $"{numInput1} {operationSymbol} {numInput2} = {result}";
             }
-
-            // T0D0: Move the calling of the MathOperationsMenu method to the start of the loop to make it easier to implement the other operations.
-
-            Enums.MathOperation mathOperation = CalculatorInterface.MathOperationsMenu();
-            operationSymbol = mathOperation switch
+            else
             {
-                Enums.MathOperation.Add => "+",
-                Enums.MathOperation.Subtract => "-",
-                Enums.MathOperation.Multiply => "*",
-                Enums.MathOperation.Divide => "/",
-                _ => throw new NotImplementedException()
-            };
+                result = helpers.GetResult(calculator, operationSymbol, cleanNum1);
 
-            result = Math.Round(calculator.DoOperation(cleanNum1, cleanNum2, operationSymbol), 2);
-            if (double.IsNaN(result))
-            {
-                Console.WriteLine("This operation will result in a mathematical error.\n");
+                fullOperationFormat = $"{operationSymbol} {numInput1} = {result}";
             }
-            else Console.WriteLine($"Your result: {result}");
-
-            string fullOperationFormat = $"{numInput1} {operationSymbol} {numInput2} = {result}";
 
             Helpers.AddToHistory((fullOperationFormat, result));
 
@@ -94,9 +99,9 @@ internal static class CalculatorFunctionality
 
             numInput1 = "";
         }
+
         calculator.Finish();
-    }
-            
+    }       
 
     internal static void ShowLatestHistory()
     {

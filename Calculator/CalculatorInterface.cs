@@ -37,8 +37,10 @@ internal static class CalculatorInterface
 
     }
 
-    internal static Enums.MathOperation MathOperationsMenu()
+    internal static MathOperation MathOperationsMenu()
     {
+        Console.Clear();
+
         var mathOperation = AnsiConsole.Prompt(
             new SelectionPrompt<MathOperation>()
             .Title("Select which math operation you wish to do: ")

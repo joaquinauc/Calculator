@@ -48,6 +48,30 @@ public class Calculator
                 }
                 writer.WriteValue("Divide");
                 break;
+            case "√":
+                result = Math.Sqrt(num1);
+                writer.WriteValue("Square Root");
+                break;
+            case "^":
+                result = Math.Pow(num1, num2);
+                writer.WriteValue("Power");
+                break;
+            case "10x":
+                result = Math.Pow(10, num1);
+                writer.WriteValue("10x");
+                break;
+            case "Sin":
+                result = Math.Sin(num1);
+                writer.WriteValue("Sin");
+                break;
+            case "Cos":
+                result = Math.Cos(num1);
+                writer.WriteValue("Cos");
+                break;
+            case "Tan":
+                result = Math.Tan(num1);
+                writer.WriteValue("Tan");
+                break;
             default:
                 break;
         }

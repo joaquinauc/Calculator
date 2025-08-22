@@ -21,14 +21,12 @@ internal class Enums
         Subtract,
         Multiply,
         Divide,
-        /*
         SquareRoot,
         TakingThePower,
         TenElevatedToX,
         Sin,
         Cos,
         Tan
-        */
     }
 }
 
