@@ -17,7 +17,7 @@ public class Calculator
         writer.WriteStartArray();
     }
 
-    public double DoOperation(double num1, double num2, string op)
+    public double DoOperation(string op, double num1, double num2)
     {
         double result = double.NaN;
         writer.WriteStartObject();
@@ -63,10 +63,5 @@ public class Calculator
         writer.WriteEndArray();
         writer.WriteEndObject();
         writer.Close();
-    }
-
-    public int CalculatorUsed(int timesCalculatorIsUsed)
-    {
-        return timesCalculatorIsUsed++;
     }
 }
