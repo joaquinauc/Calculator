@@ -29,4 +29,3 @@ internal class Enums
         Tan
     }
 }
-

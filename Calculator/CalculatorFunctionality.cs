@@ -36,8 +36,7 @@ internal static class CalculatorFunctionality
                 _ => throw new NotImplementedException()
             };
 
-            Console.WriteLine($"Times calculator has been used: {timesCalculatorIsUsed}\n");
-            timesCalculatorIsUsed++;
+            Console.WriteLine($"Times calculator has been used: {timesCalculatorIsUsed++}\n");
 
             if (numInput1 == "")
             {
@@ -99,7 +98,6 @@ internal static class CalculatorFunctionality
 
             numInput1 = "";
         }
-
         calculator.Finish();
     }       
 

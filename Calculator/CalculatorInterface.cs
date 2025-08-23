@@ -34,7 +34,6 @@ internal static class CalculatorInterface
             }
 
         } while (exitProgram == false);
-
     }
 
     internal static MathOperation MathOperationsMenu()
@@ -71,7 +70,6 @@ internal static class CalculatorInterface
             Console.ReadLine();
             return -1;
         }
-
         return Helpers.LatestHistory.IndexOf(calculationOption);
     }
 
