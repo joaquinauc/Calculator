@@ -18,6 +18,16 @@ internal static class CalculatorInterface
                 new SelectionPrompt<CalculatorOption>()
                 .Title("Select which action you wish to do: ")
                 .AddChoices(Enum.GetValues<CalculatorOption>())
+                .UseConverter(option =>
+                {
+                    return option switch
+                    {
+                        CalculatorOption.Calculator => "Use the calculator",
+                        CalculatorOption.LatestCalculations => "See your calculations history",
+                        CalculatorOption.Exit => "Exit the program",
+                        _ => option.ToString()
+                    };
+                })
             );
 
             if (calculatorOption == CalculatorOption.Exit)
@@ -61,6 +71,7 @@ internal static class CalculatorInterface
                 new SelectionPrompt<(string, double)>()
                 .Title("Select a calculation which you want to use the result for another calculation, or delete it: ")
                 .AddChoices(Helpers.LatestHistory)
+                .UseConverter(option => option.Item1)
             );
         }
         catch (InvalidOperationException)
@@ -81,6 +92,15 @@ internal static class CalculatorInterface
             new SelectionPrompt<DeleteOrUseResult>()
             .Title("Select an option: ")
             .AddChoices(Enum.GetValues<DeleteOrUseResult>())
+            .UseConverter(option =>
+            {
+                return option switch
+                {
+                    DeleteOrUseResult.UseResult => "Continue with this result",
+                    DeleteOrUseResult.Delete => "Delete from history",
+                    _ => option.ToString()
+                };
+            })
         );
 
         if (useOrDeleteOption == DeleteOrUseResult.UseResult)
