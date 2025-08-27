@@ -49,7 +49,7 @@ internal static class CalculatorInterface
         return mathOperation;
     }
 
-    internal static int LatestHistoryMenu()
+    internal static int? LatestHistoryMenu()
     {
         Console.Clear();
 
@@ -68,7 +68,7 @@ internal static class CalculatorInterface
             Console.WriteLine("Try again when you have some calculations in your pocket kiddo!\n");
             Console.Write("Press Enter to continue...");
             Console.ReadLine();
-            return -1;
+            return null;
         }
         return Helpers.LatestHistory.IndexOf(calculationOption);
     }

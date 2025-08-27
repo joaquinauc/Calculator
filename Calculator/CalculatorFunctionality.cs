@@ -103,8 +103,11 @@ internal static class CalculatorFunctionality
 
     internal static void ShowLatestHistory()
     {
-        int indexOfCalculation = CalculatorInterface.LatestHistoryMenu();
+        int? indexOfCalculation = CalculatorInterface.LatestHistoryMenu();
 
-        CalculatorInterface.UseOrDelete(indexOfCalculation);
+        if (indexOfCalculation.HasValue)
+        {
+            CalculatorInterface.UseOrDelete((int)indexOfCalculation);
+        }
     }
 }
