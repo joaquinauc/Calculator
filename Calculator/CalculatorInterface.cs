@@ -33,7 +33,7 @@ internal static class CalculatorInterface
                 CalculatorFunctionality.CalculatorLogic();
             }
 
-        } while (exitProgram == false);
+        } while (!exitProgram);
     }
 
     internal static MathOperation MathOperationsMenu()
