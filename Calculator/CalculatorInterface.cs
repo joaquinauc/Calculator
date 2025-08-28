@@ -3,9 +3,11 @@ using static CalculatorProgram.Enums;
 
 namespace CalculatorProgram;
 
-internal static class CalculatorInterface
+internal class CalculatorInterface
 {
-    internal static void CalculatorMenu()
+    private readonly CalculatorFunctionality calculatorFunctionality = new();
+
+    internal void CalculatorMenu()
     {
         CalculatorOption? calculatorOption;
         bool exitProgram = false;
@@ -36,17 +38,17 @@ internal static class CalculatorInterface
             }
             else if (calculatorOption == CalculatorOption.LatestCalculations)
             {
-                CalculatorFunctionality.ShowLatestHistory();
+                CalculatorFunctionality.ShowLatestHistory(this);
             }
             else
             {
-                CalculatorFunctionality.CalculatorLogic();
+                calculatorFunctionality.CalculatorLogic();
             }
 
         } while (!exitProgram);
     }
 
-    internal static MathOperation MathOperationsMenu()
+    internal MathOperation MathOperationsMenu()
     {
         Console.Clear();
 
@@ -59,7 +61,7 @@ internal static class CalculatorInterface
         return mathOperation;
     }
 
-    internal static int? LatestHistoryMenu()
+    internal int? LatestHistoryMenu()
     {
         Console.Clear();
 
@@ -84,7 +86,7 @@ internal static class CalculatorInterface
         return Helpers.LatestHistory.IndexOf(calculationOption);
     }
 
-    internal static void UseOrDelete(int indexOfCalculation)
+    internal void UseOrDelete(int indexOfCalculation)
     {
         Console.Clear();
 
@@ -106,7 +108,7 @@ internal static class CalculatorInterface
         if (useOrDeleteOption == DeleteOrUseResult.UseResult)
         {
             string resultOfCalculation = String.Format("{0}", Helpers.LatestHistory[indexOfCalculation].Item2);
-            CalculatorFunctionality.CalculatorLogic(resultOfCalculation);
+            calculatorFunctionality.CalculatorLogic(resultOfCalculation);
         }
         else
         {
@@ -114,7 +116,7 @@ internal static class CalculatorInterface
         }
     }
 
-    internal static ContinueUsingOption ContinueOrExit()
+    internal ContinueUsingOption ContinueOrExit()
     {
         var useOrDeleteOption = AnsiConsole.Prompt(
             new SelectionPrompt<ContinueUsingOption>()
