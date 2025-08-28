@@ -5,14 +5,13 @@ internal class CalculatorFunctionality
 {
     private int timesCalculatorIsUsed;
 
-    internal void CalculatorLogic(string? numInput1 = "")
+    internal void CalculatorLogic(Calculator calculatorLog, string? numInput1 = "")
     {
         bool endApp = false;
 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
-        Calculator calculator = new();
         Helpers helpers = new();
         CalculatorInterface calculatorInterface = new();
 
@@ -70,13 +69,13 @@ internal class CalculatorFunctionality
                     numInput2 = Console.ReadLine();
                 }
 
-                result = helpers.GetResult(calculator, operationSymbol, cleanNum1, cleanNum2);
+                result = helpers.GetResult(calculatorLog, operationSymbol, cleanNum1, cleanNum2);
 
                 fullOperationFormat = $"{numInput1} {operationSymbol} {numInput2} = {result}";
             }
             else
             {
-                result = helpers.GetResult(calculator, operationSymbol, cleanNum1);
+                result = helpers.GetResult(calculatorLog, operationSymbol, cleanNum1);
 
                 fullOperationFormat = $"{operationSymbol} {numInput1} = {result}";
             }
@@ -101,16 +100,15 @@ internal class CalculatorFunctionality
 
             numInput1 = "";
         }
-        calculator.Finish();
     }       
 
-    internal static void ShowLatestHistory(CalculatorInterface calculatorInterface)
+    internal static void ShowLatestHistory(CalculatorInterface calculatorInterface, Calculator calculatorLog)
     {
         int? indexOfCalculation = calculatorInterface.LatestHistoryMenu();
 
         if (indexOfCalculation.HasValue)
         {
-            calculatorInterface.UseOrDelete((int)indexOfCalculation);
+            calculatorInterface.UseOrDelete((int)indexOfCalculation, calculatorLog);
         }
     }
 }

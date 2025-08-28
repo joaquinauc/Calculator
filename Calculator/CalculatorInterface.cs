@@ -1,4 +1,5 @@
-﻿using Spectre.Console;
+﻿using CalculatorLibrary;
+using Spectre.Console;
 using static CalculatorProgram.Enums;
 
 namespace CalculatorProgram;
@@ -7,7 +8,7 @@ internal class CalculatorInterface
 {
     private readonly CalculatorFunctionality calculatorFunctionality = new();
 
-    internal void CalculatorMenu()
+    internal void CalculatorMenu(Calculator calculatorLog)
     {
         CalculatorOption? calculatorOption;
         bool exitProgram = false;
@@ -35,14 +36,15 @@ internal class CalculatorInterface
             if (calculatorOption == CalculatorOption.Exit)
             {
                 exitProgram = true;
+                calculatorLog.Finish();
             }
             else if (calculatorOption == CalculatorOption.LatestCalculations)
             {
-                CalculatorFunctionality.ShowLatestHistory(this);
+                CalculatorFunctionality.ShowLatestHistory(this, calculatorLog);
             }
             else
             {
-                calculatorFunctionality.CalculatorLogic();
+                calculatorFunctionality.CalculatorLogic(calculatorLog);
             }
 
         } while (!exitProgram);
@@ -86,7 +88,7 @@ internal class CalculatorInterface
         return Helpers.LatestHistory.IndexOf(calculationOption);
     }
 
-    internal void UseOrDelete(int indexOfCalculation)
+    internal void UseOrDelete(int indexOfCalculation, Calculator calculatorLog)
     {
         Console.Clear();
 
@@ -108,7 +110,7 @@ internal class CalculatorInterface
         if (useOrDeleteOption == DeleteOrUseResult.UseResult)
         {
             string resultOfCalculation = String.Format("{0}", Helpers.LatestHistory[indexOfCalculation].Item2);
-            calculatorFunctionality.CalculatorLogic(resultOfCalculation);
+            calculatorFunctionality.CalculatorLogic(calculatorLog, resultOfCalculation);
         }
         else
         {
