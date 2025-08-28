@@ -1,9 +1,9 @@
 ﻿using CalculatorLibrary;
 namespace CalculatorProgram;
 
-internal static class CalculatorFunctionality
+internal class CalculatorFunctionality
 {
-    internal static void CalculatorLogic(string? numInput1 = "")
+    internal void CalculatorLogic(string? numInput1 = "")
     {
         bool endApp = false;
         int timesCalculatorIsUsed = 0;
@@ -13,13 +13,14 @@ internal static class CalculatorFunctionality
 
         Calculator calculator = new();
         Helpers helpers = new();
+        CalculatorInterface calculatorInterface = new();
 
         while (!endApp)
         {
             string fullOperationFormat;
             double result;
 
-            Enums.MathOperation mathOperation = CalculatorInterface.MathOperationsMenu();
+            Enums.MathOperation mathOperation = calculatorInterface.MathOperationsMenu();
 
             string operationSymbol = mathOperation switch
             {
@@ -85,7 +86,7 @@ internal static class CalculatorFunctionality
             {
                 Console.WriteLine("------------------------\n");
 
-                Enums.ContinueUsingOption continueUsingOption = CalculatorInterface.ContinueOrExit();
+                Enums.ContinueUsingOption continueUsingOption = calculatorInterface.ContinueOrExit();
 
                 if (continueUsingOption == Enums.ContinueUsingOption.Exit) endApp = true;
             }
@@ -102,13 +103,13 @@ internal static class CalculatorFunctionality
         calculator.Finish();
     }       
 
-    internal static void ShowLatestHistory()
+    internal static void ShowLatestHistory(CalculatorInterface calculatorInterface)
     {
-        int? indexOfCalculation = CalculatorInterface.LatestHistoryMenu();
+        int? indexOfCalculation = calculatorInterface.LatestHistoryMenu();
 
         if (indexOfCalculation.HasValue)
         {
-            CalculatorInterface.UseOrDelete((int)indexOfCalculation);
+            calculatorInterface.UseOrDelete((int)indexOfCalculation);
         }
     }
 }
