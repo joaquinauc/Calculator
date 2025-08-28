@@ -3,10 +3,11 @@ namespace CalculatorProgram;
 
 internal class CalculatorFunctionality
 {
+    private int timesCalculatorIsUsed;
+
     internal void CalculatorLogic(string? numInput1 = "")
     {
         bool endApp = false;
-        int timesCalculatorIsUsed = 0;
 
         Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
