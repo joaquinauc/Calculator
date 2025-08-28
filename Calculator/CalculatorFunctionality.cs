@@ -84,9 +84,10 @@ internal static class CalculatorFunctionality
             if (endApp == false)
             {
                 Console.WriteLine("------------------------\n");
-                Console.Write("Press 'n' and Enter to return to the calculator menu, or press any other key or Enter to continue: ");
 
-                if (Console.ReadLine() == "n") endApp = true;
+                Enums.ContinueUsingOption continueUsingOption = CalculatorInterface.ContinueOrExit();
+
+                if (continueUsingOption == Enums.ContinueUsingOption.Exit) endApp = true;
             }
             else
             {

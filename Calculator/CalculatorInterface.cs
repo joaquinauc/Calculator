@@ -113,4 +113,15 @@ internal static class CalculatorInterface
             Helpers.DeleteOfHistory(indexOfCalculation);
         }
     }
+
+    internal static ContinueUsingOption ContinueOrExit()
+    {
+        var useOrDeleteOption = AnsiConsole.Prompt(
+            new SelectionPrompt<ContinueUsingOption>()
+            .Title("Do you want to continue using or exit the program? ")
+            .AddChoices(Enum.GetValues<ContinueUsingOption>())
+        );
+
+        return useOrDeleteOption;
+    }
 }

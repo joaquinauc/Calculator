@@ -28,4 +28,10 @@ internal class Enums
         Cos,
         Tan
     }
+
+    internal enum ContinueUsingOption
+    {
+        Continue,
+        Exit
+    }
 }
