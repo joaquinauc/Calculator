@@ -1,3 +1,5 @@
 ﻿using CalculatorProgram;
 
-CalculatorInterface.CalculatorMenu();
+CalculatorInterface calculatorInterface = new();
+        
+calculatorInterface.CalculatorMenu();
